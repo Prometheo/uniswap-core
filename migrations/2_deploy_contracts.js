@@ -1,4 +1,4 @@
-const Factory = artifacts.require("PlutoPepeV2Factory.sol");
+const Factory = artifacts.require("PepeSwapV2Factory.sol");
 const PepeToken1 = artifacts.require("PepeToken1.sol");
 const PepeToken2 = artifacts.require("PepeToken2.sol");
 

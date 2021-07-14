@@ -1,9 +1,9 @@
 pragma solidity =0.5.16;
 
 import './interfaces/IUniswapV2Factory.sol';
-import './PlutoPepeV2Pair.sol';
+import './PepeSwapV2Pair.sol';
 
-contract PlutoPepeV2Factory is IUniswapV2Factory {
+contract PepeSwapV2Factory is IUniswapV2Factory {
     address public feeTo;
     address public feeToSetter;
 
@@ -21,11 +21,11 @@ contract PlutoPepeV2Factory is IUniswapV2Factory {
     }
 
     function createPair(address tokenA, address tokenB) external returns (address pair) {
-        require(tokenA != tokenB, 'UniswapV2: IDENTICAL_ADDRESSES');
+        require(tokenA != tokenB, 'PepeSwapV2: IDENTICAL_ADDRESSES');
         (address token0, address token1) = tokenA < tokenB ? (tokenA, tokenB) : (tokenB, tokenA);
-        require(token0 != address(0), 'UniswapV2: ZERO_ADDRESS');
-        require(getPair[token0][token1] == address(0), 'UniswapV2: PAIR_EXISTS'); // single check is sufficient
-        bytes memory bytecode = type(PlutoPepeV2Pair).creationCode;
+        require(token0 != address(0), 'PepeSwapV2: ZERO_ADDRESS');
+        require(getPair[token0][token1] == address(0), 'PepeSwapV2: PAIR_EXISTS'); // single check is sufficient
+        bytes memory bytecode = type(PepeSwapV2Pair).creationCode;
         bytes32 salt = keccak256(abi.encodePacked(token0, token1));
         assembly {
             pair := create2(0, add(bytecode, 32), mload(bytecode), salt)
@@ -38,12 +38,12 @@ contract PlutoPepeV2Factory is IUniswapV2Factory {
     }
 
     function setFeeTo(address _feeTo) external {
-        require(msg.sender == feeToSetter, 'UniswapV2: FORBIDDEN');
+        require(msg.sender == feeToSetter, 'PepeSwapV2: FORBIDDEN');
         feeTo = _feeTo;
     }
 
     function setFeeToSetter(address _feeToSetter) external {
-        require(msg.sender == feeToSetter, 'UniswapV2: FORBIDDEN');
+        require(msg.sender == feeToSetter, 'PepeSwapV2: FORBIDDEN');
         feeToSetter = _feeToSetter;
     }
 }
