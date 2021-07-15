@@ -4,7 +4,7 @@ const PepeToken2 = artifacts.require("PepeToken2.sol");
 
 
 module.exports = async function (deployer, network, addresses) {
-  await deployer.deploy(Factory, addresses[0]);
+  await deployer.deploy(Factory, addresses[2]);
   const factory = await Factory.deployed();
 
   let pepe1Address, pepe2Address;
@@ -12,8 +12,8 @@ module.exports = async function (deployer, network, addresses) {
     pepe1Address = '';
     pepe2Address = '';
   } else {
-      await deployer.deploy(PepeToken1);
-      await deployer.deploy(PepeToken2);
+      await deployer.deploy(PepeToken1, );
+      await deployer.deploy(PepeToken2, );
       const pepe1 = await PepeToken1.deployed();
       const pepe2 = await PepeToken2.deployed();
       pepe1Address = pepe1.address;
